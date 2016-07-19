@@ -1,3 +1,30 @@
+Homework/ User Stories/ App Features July 19th, 2016
+
+Features: 
+My E-commerce app is going to primarily sunglasses. The store will have an opening screen, with an enter button that will access the 
+main shopping area of the application. All the items will be listed using a recycler view for the display of the items.
+
+Their will be a detailed project product page if you click on any of the items in the recycler view. An add to cart button will listed both in the recycler view list as well as in the detailed listing of each item.
+
+As a user I can click on the home welcome screen and will be redirected to the main store.
+
+The user will be able to scroll through more than a dozen different items.
+
+A user will be able to click on an individual item's "buy now button" in the Main store and the item will be added to the shopping cart.
+
+Their will be a floating action button constantly in the bottom right hand corner that will allow the user access to the shopping cart.
+
+In the detailed items list, the user will have the same functionality, allowing them to add to cart and also view the shopping cart any time.
+
+The shopping cart experience will allow the user to add or delete items and then finally check out when complete or return to the original shopping page. 
+
+
+
+
+
+
+
+
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project #2: Mobile Commerce App
 
 #### Overview
