@@ -1,5 +1,6 @@
 package com.example.raymour.tintswear;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -15,13 +16,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TINTSINVENTORY_TABLE_NAME = "TintsInventory";
     public static final String COL_ID = "_id";
     public static final String COL_SUNGLASS_NAME = "sunglass_name";
-    public static final double COL_SUNGLASS_PRICE = 29.99;
+    public static final String COL_SUNGLASS_PRICE = "29.99";
     public static final String COL_SUNGLASS_DESCRIPTION = "sunglasses_description";
     public static final String COL_SUNGLASS_IMAGELOCATION = "R.id.blackbetty";
 
     public static final String SUNGLASSSALE_TABLE_NAME = "SunglassSales";
     public static final String COL_SUNGLASSSALE_NAME = "Sunglass_Sale_Name";
-    public static final double COL_SUNGLASSSALE_PRICE = 24.99;
+    public static final String COL_SUNGLASSSALE_PRICE = "24.99";
     public static final String COL_SUNGLASSSALE_COUPONCODE = "couponcode";
 
     //created database with two tables
@@ -43,11 +44,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE " + TINTSINVENTORY_TABLE_NAME + " (" +
-                COL_ID + " INTEGER PRIMARY KEY, " +
-                COL_SUNGLASS_NAME + " TEXT, " +
-                COL_SUNGLASS_PRICE + " REAL, " +
-                COL_SUNGLASS_DESCRIPTION + " TEXT, " +
-                COL_SUNGLASS_IMAGELOCATION + " TEXT )");
+                COL_ID + " INTEGER PRIMARY KEY,"+
+                COL_SUNGLASS_NAME + " TEXT," +
+                COL_SUNGLASS_PRICE + " REAL," +
+                COL_SUNGLASS_DESCRIPTION + " TEXT," +
+                COL_SUNGLASS_IMAGELOCATION + " TEXT);");
 
         sqLiteDatabase.execSQL("CREATE TABLE " + SUNGLASSSALE_TABLE_NAME + " (" +
                 COL_SUNGLASSSALE_NAME + " TEXT, " +
@@ -63,6 +64,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TINTSINVENTORY_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + SUNGLASSSALE_TABLE_NAME);
         sqLiteDatabase.close();
+    }
+
+    public void insertRowTintsInventory (Inventory inventory) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_SUNGLASS_NAME, inventory.getSunglassName());
+        values.put(COL_SUNGLASS_IMAGELOCATION, inventory.getSunglassImageLocation());
+        values.put(COL_SUNGLASS_PRICE, inventory.getSunglassPrice());
+        values.put(COL_SUNGLASS_DESCRIPTION, inventory.getSunglassDescription());
+        sqLiteDatabase.insertOrThrow(TINTSINVENTORY_TABLE_NAME, null, values);
+    }
+
+    public void insertRowSunglassSale (SunglassSale sunglassSale){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_SUNGLASSSALE_NAME, sunglassSale.getSunglassSaleName());
+        values.put(COL_SUNGLASSSALE_PRICE, sunglassSale.getSunglassSalePrice());
+        values.put(COL_SUNGLASSSALE_COUPONCODE, sunglassSale.getSunglassCouponCode());
+        sqLiteDatabase.insertOrThrow(SUNGLASSSALE_TABLE_NAME, null, values);
+
     }
 
 

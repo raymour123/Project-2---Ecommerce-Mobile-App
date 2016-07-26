@@ -9,17 +9,17 @@ public class CustomProduct {
 
     String mItemTitle;
 //    Image mItemImage;
-    double mItemPrice;
+    String  mItemPrice;
     String mItemDescription;
 
     public CustomProduct(){
         mItemTitle = "Item Title";
-        mItemPrice = 29.99;
+        mItemPrice = "29.99";
         mItemDescription = "Item Description";
 
     }
 
-    public  CustomProduct(String itemTitle, double itemPrice, String itemDescription){
+    public  CustomProduct(String itemTitle, String itemPrice, String itemDescription){
         mItemTitle = itemTitle;
         mItemPrice = itemPrice;
         mItemDescription = itemDescription;
@@ -29,7 +29,7 @@ public class CustomProduct {
         return mItemTitle;
     }
 
-    public double getmItemPrice() {
+    public String getmItemPrice() {
         return mItemPrice;
     }
 
@@ -41,7 +41,7 @@ public class CustomProduct {
         this.mItemTitle = mItemTitle;
     }
 
-    public void setmItemPrice(double mItemPrice) {
+    public void setmItemPrice(String mItemPrice) {
         this.mItemPrice = mItemPrice;
     }
 

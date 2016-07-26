@@ -42,14 +42,29 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
-        ArrayList<CustomProduct> customProducts = new ArrayList<>();
-        customProducts.add(new CustomProduct("Black Betty", 29.99 ,"Bamboo Frames"));
+        DatabaseHelper databaseHelper = DatabaseHelper.getsInstance(MainActivity.this);
 
+        Inventory item1 = new Inventory("Black Betty's", "R.id.blackbetty", "29.99", "Bamboo Frames, Stylish, Polarized");
+        Inventory item2 = new Inventory("Bushwoods", "R.id.blackblue", "29.99", "Bamboo Frames, Stylish, Polarized");
+        Inventory item3 = new Inventory("Black Outs", "R.id.blackgreen", "29.99", "Bamboo Frames, Stylish, Polarized");
+        Inventory item4 = new Inventory("Los Leches", "R.id.greyblue", "29.99", "Bamboo Frames, Stylish, Polarized");
+
+        databaseHelper.insertRowTintsInventory(item1);
+        databaseHelper.insertRowTintsInventory(item2);
+        databaseHelper.insertRowTintsInventory(item3);
+        databaseHelper.insertRowTintsInventory(item4);
+
+        ArrayList<CustomProduct> customProducts = new ArrayList<>();
+        customProducts.add(new CustomProduct("Black Betty", "29.99" ,"Bamboo Frames"));
+        customProducts.add(new CustomProduct("Black Betty", "29.99" ,"Bamboo Frames"));
+       customProducts.add(new CustomProduct("Black Betty", "29.99" ,"Bamboo Frames"));
 
 
 
         mRecyclerView.setAdapter(new CPRecyclerViewAdapter(customProducts));
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
