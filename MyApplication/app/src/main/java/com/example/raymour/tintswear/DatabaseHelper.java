@@ -2,6 +2,7 @@ package com.example.raymour.tintswear;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -16,13 +17,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TINTSINVENTORY_TABLE_NAME = "TintsInventory";
     public static final String COL_ID = "_id";
     public static final String COL_SUNGLASS_NAME = "sunglass_name";
-    public static final String COL_SUNGLASS_PRICE = "29.99";
+    public static final String COL_SUNGLASS_IMAGELOCATION = "image_location";
+    public static final String COL_SUNGLASS_PRICE = "sunglass_price";
     public static final String COL_SUNGLASS_DESCRIPTION = "sunglasses_description";
-    public static final String COL_SUNGLASS_IMAGELOCATION = "R.id.blackbetty";
+
+
+    public static final String[] INVENTORY_COLUMNS = {COL_ID,COL_SUNGLASS_NAME, COL_SUNGLASS_IMAGELOCATION,COL_SUNGLASS_PRICE, COL_SUNGLASS_DESCRIPTION};
 
     public static final String SUNGLASSSALE_TABLE_NAME = "SunglassSales";
-    public static final String COL_SUNGLASSSALE_NAME = "Sunglass_Sale_Name";
-    public static final String COL_SUNGLASSSALE_PRICE = "24.99";
+    public static final String COL_SUNGLASSSALE_NAME = "sunglass_sale_name";
+    public static final String COL_SUNGLASSSALE_PRICE = "sunglass_sale_price";
     public static final String COL_SUNGLASSSALE_COUPONCODE = "couponcode";
 
     //created database with two tables
@@ -44,15 +48,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE " + TINTSINVENTORY_TABLE_NAME + " (" +
-                COL_ID + " INTEGER PRIMARY KEY,"+
-                COL_SUNGLASS_NAME + " TEXT," +
-                COL_SUNGLASS_PRICE + " REAL," +
-                COL_SUNGLASS_DESCRIPTION + " TEXT," +
-                COL_SUNGLASS_IMAGELOCATION + " TEXT);");
+                COL_ID + " INTEGER PRIMARY KEY, " +
+                COL_SUNGLASS_NAME + " TEXT, " +
+                COL_SUNGLASS_PRICE + " TEXT, " +
+                COL_SUNGLASS_DESCRIPTION + " TEXT, " +
+                COL_SUNGLASS_IMAGELOCATION + " TEXT )");
 
         sqLiteDatabase.execSQL("CREATE TABLE " + SUNGLASSSALE_TABLE_NAME + " (" +
                 COL_SUNGLASSSALE_NAME + " TEXT, " +
-                COL_SUNGLASSSALE_PRICE + " REAL, " +
+                COL_SUNGLASSSALE_PRICE + " TEXT, " +
                 COL_SUNGLASSSALE_COUPONCODE + " TEXT, " +
                 "FOREIGN KEY(" + COL_SUNGLASSSALE_NAME +") " + "REFERENCES " + TINTSINVENTORY_TABLE_NAME
                 + "(" + COL_SUNGLASS_NAME + "))");
@@ -83,6 +87,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COL_SUNGLASSSALE_PRICE, sunglassSale.getSunglassSalePrice());
         values.put(COL_SUNGLASSSALE_COUPONCODE, sunglassSale.getSunglassCouponCode());
         sqLiteDatabase.insertOrThrow(SUNGLASSSALE_TABLE_NAME, null, values);
+
+    }
+
+    public Cursor getSunglassList(){
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Cursor cursor = sqLiteDatabase.query(TINTSINVENTORY_TABLE_NAME, INVENTORY_COLUMNS, null, null, null, null, null);
+
+        return cursor;
+
 
     }
 
