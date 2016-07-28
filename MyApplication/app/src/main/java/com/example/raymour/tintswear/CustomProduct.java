@@ -8,7 +8,7 @@ import android.media.Image;
 public class CustomProduct {
 
     String mItemTitle;
-//    Image mItemImage;
+//    String mItemImage;
     String  mItemPrice;
     String mItemDescription;
 
@@ -16,6 +16,7 @@ public class CustomProduct {
         mItemTitle = "Item Title";
         mItemPrice = "29.99";
         mItemDescription = "Item Description";
+
 
     }
 

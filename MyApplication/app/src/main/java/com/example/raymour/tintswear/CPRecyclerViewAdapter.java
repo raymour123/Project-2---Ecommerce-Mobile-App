@@ -1,5 +1,8 @@
 package com.example.raymour.tintswear;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.DrawableRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,9 +17,11 @@ import java.util.List;
  */
 public class CPRecyclerViewAdapter extends RecyclerView.Adapter<CPViewHolder> {
 
-    List<CustomProduct> mCustomProductList;
+    List<Inventory> mCustomProductList;
 
-    public CPRecyclerViewAdapter(final List<CustomProduct> customProductList){
+
+    public CPRecyclerViewAdapter (final List<Inventory> customProductList){
+
         mCustomProductList = customProductList;
     }
 
@@ -28,12 +33,16 @@ public class CPRecyclerViewAdapter extends RecyclerView.Adapter<CPViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(CPViewHolder holder, int position) {
+    public void onBindViewHolder(CPViewHolder holder, final int position) {
 
-        holder.mTitleView.setText("Title Text");
-        holder.mImageView.setImageResource(R.drawable.blackbetty);
-        holder.mPriceView.setText("29.99");
-        holder.mDescView.setText("Description Here");
+        Context context = holder.mImageView.getContext();
+
+        int sunglassImageLocation = context.getResources().getIdentifier(mCustomProductList.get(position).getSunglassImageLocation(),"drawable",context.getPackageName());
+
+        holder.mTitleView.setText(mCustomProductList.get(position).getSunglassName());
+        holder.mImageView.setImageResource(sunglassImageLocation);
+        holder.mPriceView.setText(mCustomProductList.get(position).getSunglassPrice());
+        holder.mDescView.setText(mCustomProductList.get(position).getSunglassDescription());
 
         View.OnClickListener onClickListener = new View.OnClickListener(){
             @Override
@@ -44,8 +53,14 @@ public class CPRecyclerViewAdapter extends RecyclerView.Adapter<CPViewHolder> {
                         break;
                     default:
                         Toast.makeText(view.getContext(), "Click Add to Cart Button to make Purchase", Toast.LENGTH_SHORT).show();
+
                 }
+//                Intent intent = new Intent(getActivity(), ShoppingCartActivity.class);
+//                intent.putExtra("Sunglass_Name", mCustomProductList.get(position).getId);
+//                intent.putExtra()
             }
+
+
         };
         holder.mButton.setOnClickListener(onClickListener);
 

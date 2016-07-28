@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by raymour on 7/26/16.
  */
@@ -27,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String SUNGLASSSALE_TABLE_NAME = "SunglassSales";
     public static final String COL_SUNGLASSSALE_NAME = "sunglass_sale_name";
     public static final String COL_SUNGLASSSALE_PRICE = "sunglass_sale_price";
-    public static final String COL_SUNGLASSSALE_COUPONCODE = "couponcode";
+    public static final String COL_SUNGLASSSALE_COUPONCODE = "coupon_code";
 
     //created database with two tables
 
@@ -35,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static DatabaseHelper getsInstance(Context context){
         if(sInstance == null){
-            sInstance = new DatabaseHelper(context.getApplicationContext());
+            sInstance = new DatabaseHelper(context);
         }
         return sInstance;
     }
@@ -90,17 +93,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public Cursor getSunglassList(){
+    public List<Inventory> getInventoryList(){
+        List<Inventory> sunglassList = new ArrayList<>();
+        SQLiteDatabase database = getReadableDatabase();
+        String query = "SELECT * FROM " + TINTSINVENTORY_TABLE_NAME;
+        Cursor cursor = database.rawQuery(query, null);
 
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        if(cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                Inventory inventory1 = new Inventory(cursor.getString(cursor.getColumnIndex(COL_SUNGLASS_NAME)),
+                        cursor.getString(cursor.getColumnIndex(COL_SUNGLASS_IMAGELOCATION)),
+                        cursor.getString(cursor.getColumnIndex(COL_SUNGLASS_PRICE)),
+                        cursor.getString(cursor.getColumnIndex(COL_SUNGLASS_DESCRIPTION)));
+                sunglassList.add(inventory1);
+                cursor.moveToNext();
 
-        Cursor cursor = sqLiteDatabase.query(TINTSINVENTORY_TABLE_NAME, INVENTORY_COLUMNS, null, null, null, null, null);
+            }
+        }
 
-        return cursor;
+        database.close();
+        return sunglassList;
+    }
 
+    public void addToCart(Inventory sunglass){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        String sunglassName = sunglass.getSunglassName();
+        String sunglassPrice = sunglass.getSunglassPrice();
+        values.put(COL_SUNGLASSSALE_NAME, sunglassName);
+        values.put(COL_SUNGLASSSALE_PRICE, sunglassPrice);
+        long name = db.insertOrThrow(SUNGLASSSALE_TABLE_NAME, null, values);
+        db.close();
 
     }
 
 
 
+//    public ArrayList<SunglassSale> getCartItemsasObjects() {
+//        ArrayList<SunglassSale> shoppingCartList = new ArrayList<>();
+//        SQLiteDatabase db = getReadableDatabase();
+//
+//    }
 }
+

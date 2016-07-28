@@ -1,6 +1,7 @@
 package com.example.raymour.tintswear;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,7 +26,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView mRecyclerView;
+    final DatabaseHelper databaseHelper = DatabaseHelper.getsInstance(MainActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,30 +41,32 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, ShoppingCartActivity.class);
+                startActivity(intent);
             }
         });
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
+        List<Inventory> inventoryList = databaseHelper.getInventoryList();
 
-        DatabaseHelper databaseHelper = DatabaseHelper.getsInstance(MainActivity.this);
 
-        Inventory item1 = new Inventory("Black Betty's", "blackbetty.png", "29.99", "Bamboo Frames, Stylish, Polarized");
-        Inventory item2 = new Inventory("Black Betty Blues", "blackblue.png", "29.99", "Bamboo Frames, Stylish, Polarized, Blue Reflective Lenses");
-        Inventory item3 = new Inventory("Black Betty Fire", "blackorange.png", "29.99", "Bamboo Frames, Stylish, Polarized, Orange Reflective Lenses");
-        Inventory item4 = new Inventory("Bushwood Blacks", "bushblack.png", "29.99", "Bamboo Frames, Stylish, Polarized");
-        Inventory item5 = new Inventory("Bushwood Blues", "bushblue.png", "29.99", "Bamboo Frames, Stylish, Polarized, Blue Reflective Lenses");
-        Inventory item6 = new Inventory("Bushwood Browns", "bushbrowns.png", "29.99", "Bamboo Frames, Stylish, Polarized");
-        Inventory item7 = new Inventory("Bushwood Greens", "bushgreen.png", "29.99", "Bamboo Frames, Stylish, Polarized, Green Reflective Lenses");
-        Inventory item8 = new Inventory("Bushwood SunFire", "bushyellow.png", "29.99", "Bamboo Frames, Stylish, Polarized, Yellow Reflective Lenses");
-        Inventory item9 = new Inventory("Magnum Blues", "greyblue.png", "29.99", "Bamboo Frames, Stylish, Polarized, Blue Reflective Lenses");
-        Inventory item10 = new Inventory("Los Leches", "whiteblack.png", "29.99", "Bamboo Frames, Stylish, Polarized");
-        Inventory item11 = new Inventory("Los Leches Blues", "whiteblue.png", "29.99", "Bamboo Frames, Stylish, Polarized, Blue Reflective Lenses");
-        Inventory item12 = new Inventory("Los Leches Greens", "whitegreen.png", "29.99", "Bamboo Frames, Stylish, Polarized, Green Reflective Lenses");
-        Inventory item13 = new Inventory("Los Leches Mirrors", "whitemirror.png", "29.99", "Bamboo Frames, Stylish, Polarized");
-        Inventory item14 = new Inventory("Los Leches Fire", "whiteorange.png", "29.99", "Bamboo Frames, Stylish, Polarized");
+        Inventory item1 = new Inventory("Black Betty's", "blackbetty", "29.99", "Bamboo Frames, Stylish, Polarized");
+        Inventory item2 = new Inventory("Black Betty Blues", "blackblue", "29.99", "Bamboo Frames, Stylish, Polarized, Blue Reflective Lenses");
+        Inventory item3 = new Inventory("Black Betty Fire", "blackorange", "29.99", "Bamboo Frames, Stylish, Polarized, Orange Reflective Lenses");
+        Inventory item4 = new Inventory("Bushwood Blacks", "bushblack", "29.99", "Bamboo Frames, Stylish, Polarized");
+        Inventory item5 = new Inventory("Bushwood Blues", "bushblue", "29.99", "Bamboo Frames, Stylish, Polarized, Blue Reflective Lenses");
+        Inventory item6 = new Inventory("Bushwood Browns", "bushbrown" , "29.99", "Bamboo Frames, Stylish, Polarized");
+        Inventory item7 = new Inventory("Bushwood Greens", "bushgreen", "29.99", "Bamboo Frames, Stylish, Polarized, Green Reflective Lenses");
+        Inventory item8 = new Inventory("Bushwood SunFire", "bushyellow", "29.99", "Bamboo Frames, Stylish, Polarized, Yellow Reflective Lenses");
+        Inventory item9 = new Inventory("Magnum Blues", "greyblue", "29.99", "Bamboo Frames, Stylish, Polarized, Blue Reflective Lenses");
+        Inventory item10 = new Inventory("Los Leches", "whiteblack", "29.99", "Bamboo Frames, Stylish, Polarized");
+        Inventory item11 = new Inventory("Los Leches Blues", "whiteblue", "29.99", "Bamboo Frames, Stylish, Polarized, Blue Reflective Lenses");
+        Inventory item12 = new Inventory("Los Leches Greens", "whitegreen", "29.99", "Bamboo Frames, Stylish, Polarized, Green Reflective Lenses");
+        Inventory item13 = new Inventory("Los Leches Mirrors", "whitemirror", "29.99", "Bamboo Frames, Stylish, Polarized");
+        Inventory item14 = new Inventory("Los Leches Fire", "whiteorange", "29.99", "Bamboo Frames, Stylish, Polarized");
 
 
         databaseHelper.insertRowTintsInventory(item1);
@@ -80,44 +84,54 @@ public class MainActivity extends AppCompatActivity {
         databaseHelper.insertRowTintsInventory(item13);
         databaseHelper.insertRowTintsInventory(item14);
 
-        Cursor cursor = DatabaseHelper.getsInstance(MainActivity.this).getSunglassList();
+//        Cursor cursor = (Cursor) DatabaseHelper.getsInstance(MainActivity.this);
+//
+//        CursorAdapter cursorAdapter = new CursorAdapter(MainActivity.this, cursor,
+//                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER) {
+//            @Override
+//            public View newView(Context context, Cursor cursor, ViewGroup parent) {
+//                return LayoutInflater.from(context).inflate(R.layout.customproduct,parent,false);
+//            }
+//
+//            @Override
+//            public void bindView(View view, Context context, Cursor cursor) {
+//                TextView textViewName = (TextView) view.findViewById(R.id.productName);
+//                ImageView imageView = (ImageView) view.findViewById(R.id.productImage);
+//                TextView textViewPrice = (TextView) view.findViewById(R.id.productPrice);
+//                TextView textViewDescription = (TextView) view.findViewById(R.id.productDesc);
+//
+//                int colSunName = cursor.getColumnIndex(DatabaseHelper.COL_SUNGLASS_NAME);
+//                String sunglassName = cursor.getString(colSunName);
+//                textViewName.setText(sunglassName);
+//
+//                int colSunImage = cursor.getColumnIndex(DatabaseHelper.COL_SUNGLASS_IMAGELOCATION);
+//                int sunglassImageLocation = context.getResources().getIdentifier("picture1","drawable",context.getPackageName());
+//                imageView.setImageResource(sunglassImageLocation);
+//
+//                int colSunPrice = cursor.getColumnIndex(DatabaseHelper.COL_SUNGLASS_PRICE);
+//                String sunglassPrice = cursor.getString(colSunPrice);
+//                textViewPrice.setText(sunglassPrice);
+//
+//                int colSunDesc = cursor.getColumnIndex(DatabaseHelper.COL_SUNGLASS_DESCRIPTION);
+//                String sunglassDescription = cursor.getString(colSunDesc);
+//                textViewDescription.setText(sunglassDescription);
+//
+//            }
+//        };
 
-        CursorAdapter cursorAdapter = new CursorAdapter(MainActivity.this, cursor,
-                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER) {
-            @Override
-            public View newView(Context context, Cursor cursor, ViewGroup parent) {
-                return LayoutInflater.from(context).inflate(R.layout.customproduct,parent,false);
-            }
-
-            @Override
-            public void bindView(View view, Context context, Cursor cursor) {
-                TextView textViewName = (TextView) view.findViewById(R.id.productName);
-                ImageView imageView = (ImageView) view.findViewById(R.id.productImage);
-                TextView textViewPrice = (TextView) view.findViewById(R.id.productPrice);
-                TextView textViewDescription = (TextView) view.findViewById(R.id.productDesc);
-
-                int colSunName = cursor.getColumnIndex(DatabaseHelper.COL_SUNGLASS_NAME);
-                String sunglassName = cursor.getString(colSunName);
-                textViewName.setText(sunglassName);
-
-                int colSunPrice = cursor.getColumnIndex(DatabaseHelper.COL_SUNGLASS_PRICE);
-                String sunglassPrice = cursor.getString(colSunPrice);
-                textViewPrice.setText(sunglassPrice);
-
-                int colSunDesc = cursor.getColumnIndex(DatabaseHelper.COL_SUNGLASS_DESCRIPTION);
-                String sunglassDescription = cursor.getString(colSunDesc);
-                textViewDescription.setText(sunglassDescription);
-
-            }
-        };
-
-        mRecyclerView.setAdapter(cursorAdapter);
-
-        cursor.close();
+        ArrayList<Inventory> tintsInventory = new ArrayList<>();
+        tintsInventory.addAll(databaseHelper.getInventoryList());
+//        customProducts.add(item1);
+//        customProducts.add(item2);
+//        customProducts.add(item3);
+//        customProducts.add(item4);
 
 
+        mRecyclerView.setAdapter(new CPRecyclerViewAdapter(tintsInventory));
 
+    }
 
+//
 //        ArrayList<CustomProduct> customProducts = new ArrayList<>();
 //        customProducts.add(new CustomProduct("Black Betty", "29.99" ,"Bamboo Frames"));
 //        customProducts.add(new CustomProduct("Black Betty", "29.99" ,"Bamboo Frames"));
@@ -125,9 +139,8 @@ public class MainActivity extends AppCompatActivity {
 //
 //
 //
-//        mRecyclerView.setAdapter(new CPRecyclerViewAdapter(customProducts));
 
-    }
+
 
 
     @Override
