@@ -2,18 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/shoppingCartItemName"
         android:text="Shopping Cart Item Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:layout_margin="10sp"
         />
 
     <TextView
         android:id="@+id/shoppingCartItemPrice"
         android:text="Shopping Cart Item Price"
+        android:textSize="12sp"
+        android:layout_margin="8sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-smallcaps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -22,7 +29,6 @@
         android:layout_height="wrap_content"
         android:text="Remove Item"
         android:id="@+id/itemRemoveButton"/>
-
 
 
 </LinearLayout>

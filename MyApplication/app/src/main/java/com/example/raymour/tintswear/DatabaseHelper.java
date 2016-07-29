@@ -146,5 +146,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor .close();
         return shoppingCartList;
     }
+
+//    public int getIdFromCartObject (SunglassSale item) {
+//        int id = 0;
+//        String sunglassName = String.valueOf(item.getSunglassSaleName());
+//        SQLiteDatabase database = getReadableDatabase();
+//        String query = "SELECT " + COL_ID + " FROM " +
+//                TINTSINVENTORY_TABLE_NAME + " WHERE " +
+//                COL_SUNGLASS_NAME + " LIKE " + sunglassName;
+//        Cursor cursor = database.rawQuery(query, null);
+//        if (cursor.moveToFirst()) {
+//            while (!cursor.isAfterLast()) {
+//                id = cursor.getInt(cursor.getColumnIndex(COL_ID));
+//                cursor.moveToNext();
+//            }
+//        }
+//        database.close();
+//        return id;
+//    }
+//
+//    public void removeItemFromCart (SunglassSale item) {
+//        int id = getIdFromCartObject(item);
+//        SQLiteDatabase database = getWritableDatabase();
+//
+//        String selection = COL_SUNGLASS_NAME + " = ?";
+//        String[] selectionArgs = new String[]{String.valueOf(id)};
+//        database.delete(SUNGLASSSALE_TABLE_NAME, selection, selectionArgs);
+//        database.close();
+//    }
+    public void clearCartButtonMethod() {
+        SQLiteDatabase database = getWritableDatabase();
+        database.execSQL("DELETE FROM " + SUNGLASSSALE_TABLE_NAME);
+        database.close();
+    }
 }
 

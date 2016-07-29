@@ -42,6 +42,7 @@ public class ShoppingCartRVAdapter extends RecyclerView.Adapter<ShoppingCartView
                 removeByPosition(holder.getAdapterPosition());
                 Toast.makeText(mContext, "Removed Item from Cart", Toast.LENGTH_SHORT).show();
 
+
             }
         });
 
@@ -56,7 +57,9 @@ public class ShoppingCartRVAdapter extends RecyclerView.Adapter<ShoppingCartView
     public int getItemCount() {
         return sunglassSalesList.size();
     }
+
     public void removeByPosition(int position) {
+//        DatabaseHelper.getsInstance(mContext).removeItemFromCart(sunglassSalesList.get(position));
         sunglassSalesList.remove(position);
         notifyItemRemoved(position);
     }

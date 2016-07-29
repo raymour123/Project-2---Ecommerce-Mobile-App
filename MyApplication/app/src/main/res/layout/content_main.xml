@@ -12,10 +12,16 @@
     tools:context="com.example.raymour.tintswear.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <ImageView
+        android:id="@+id/logoMainView"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:src="@drawable/tintslogo"/>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_below="@+id/logoMainView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/recyclerView1">
 
     </android.support.v7.widget.RecyclerView>
