@@ -9,7 +9,8 @@
         android:text="Shopping Cart Item Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:textSize="20sp"
+        android:layout_gravity="center"
         android:fontFamily="sans-serif-smallcaps"
         android:layout_margin="10sp"
         />
@@ -20,14 +21,17 @@
         android:textSize="12sp"
         android:layout_margin="8sp"
         android:textStyle="bold"
+        android:layout_gravity="center"
         android:fontFamily="sans-serif-smallcaps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="100sp"
+        android:layout_height="40sp"
+        android:layout_gravity="right"
         android:text="Remove Item"
+        android:textSize="10sp"
         android:id="@+id/itemRemoveButton"/>
 
 
