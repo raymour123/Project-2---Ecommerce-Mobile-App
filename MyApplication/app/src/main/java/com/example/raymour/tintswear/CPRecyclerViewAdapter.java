@@ -35,7 +35,7 @@ public class CPRecyclerViewAdapter extends RecyclerView.Adapter<CPViewHolder> {
     @Override
     public void onBindViewHolder(CPViewHolder holder, final int position) {
 
-        Context context = holder.mImageView.getContext();
+        final Context context = holder.mImageView.getContext();
 
         int sunglassImageLocation = context.getResources().getIdentifier(mCustomProductList.get(position).getSunglassImageLocation(),"drawable",context.getPackageName());
 
@@ -55,9 +55,8 @@ public class CPRecyclerViewAdapter extends RecyclerView.Adapter<CPViewHolder> {
                         Toast.makeText(view.getContext(), "Click Add to Cart Button to make Purchase", Toast.LENGTH_SHORT).show();
 
                 }
-//                Intent intent = new Intent(getActivity(), ShoppingCartActivity.class);
-//                intent.putExtra("Sunglass_Name", mCustomProductList.get(position).getId);
-//                intent.putExtra()
+                DatabaseHelper helper = DatabaseHelper.getsInstance(context);
+                helper.addToCart(mCustomProductList.get(position));
             }
 
 

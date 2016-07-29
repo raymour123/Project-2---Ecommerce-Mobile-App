@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
         Inventory item8 = new Inventory("Bushwood SunFire", "bushyellow", "29.99", "Bamboo Frames, Stylish, Polarized, Yellow Reflective Lenses");
         Inventory item9 = new Inventory("Magnum Blues", "greyblue", "29.99", "Bamboo Frames, Stylish, Polarized, Blue Reflective Lenses");
         Inventory item10 = new Inventory("Los Leches", "whiteblack", "29.99", "Bamboo Frames, Stylish, Polarized");
-        Inventory item11 = new Inventory("Los Leches Blues", "whiteblue", "29.99", "Bamboo Frames, Stylish, Polarized, Blue Reflective Lenses");
-        Inventory item12 = new Inventory("Los Leches Greens", "whitegreen", "29.99", "Bamboo Frames, Stylish, Polarized, Green Reflective Lenses");
-        Inventory item13 = new Inventory("Los Leches Mirrors", "whitemirror", "29.99", "Bamboo Frames, Stylish, Polarized");
-        Inventory item14 = new Inventory("Los Leches Fire", "whiteorange", "29.99", "Bamboo Frames, Stylish, Polarized");
+//        Inventory item11 = new Inventory("Los Leches Blues", "whiteblue", "29.99", "Bamboo Frames, Stylish, Polarized, Blue Reflective Lenses");
+//        Inventory item12 = new Inventory("Los Leches Greens", "whitegreen", "29.99", "Bamboo Frames, Stylish, Polarized, Green Reflective Lenses");
+//        Inventory item13 = new Inventory("Los Leches Mirrors", "whitemirror", "29.99", "Bamboo Frames, Stylish, Polarized");
+//        Inventory item14 = new Inventory("Los Leches Fire", "whiteorange", "29.99", "Bamboo Frames, Stylish, Polarized");
 
 
         databaseHelper.insertRowTintsInventory(item1);
@@ -79,10 +79,10 @@ public class MainActivity extends AppCompatActivity {
         databaseHelper.insertRowTintsInventory(item8);
         databaseHelper.insertRowTintsInventory(item9);
         databaseHelper.insertRowTintsInventory(item10);
-        databaseHelper.insertRowTintsInventory(item11);
-        databaseHelper.insertRowTintsInventory(item12);
-        databaseHelper.insertRowTintsInventory(item13);
-        databaseHelper.insertRowTintsInventory(item14);
+//        databaseHelper.insertRowTintsInventory(item11);
+//        databaseHelper.insertRowTintsInventory(item12);
+//        databaseHelper.insertRowTintsInventory(item13);
+//        databaseHelper.insertRowTintsInventory(item14);
 
 //        Cursor cursor = (Cursor) DatabaseHelper.getsInstance(MainActivity.this);
 //

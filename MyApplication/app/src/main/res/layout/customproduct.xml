@@ -17,6 +17,7 @@
 
     <ImageView
         android:id="@+id/productImage"
+        
         android:layout_width="125sp"
         android:layout_height="125sp"
         android:layout_margin="25sp"

@@ -127,12 +127,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public ArrayList<SunglassSale> getCartItemsObjects() {
+        ArrayList<SunglassSale> shoppingCartList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM " + SUNGLASSSALE_TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                SunglassSale sunglassSale1 = new SunglassSale(cursor.getString(cursor.getColumnIndex(COL_SUNGLASSSALE_NAME)),
+                        cursor.getString(cursor.getColumnIndex(COL_SUNGLASSSALE_PRICE)),
+                        cursor.getString(cursor.getColumnIndex(COL_SUNGLASSSALE_COUPONCODE)));
+                shoppingCartList.add(sunglassSale1);
 
+                cursor.moveToNext();
 
-//    public ArrayList<SunglassSale> getCartItemsasObjects() {
-//        ArrayList<SunglassSale> shoppingCartList = new ArrayList<>();
-//        SQLiteDatabase db = getReadableDatabase();
-//
-//    }
+            }
+        }
+        cursor .close();
+        return shoppingCartList;
+    }
 }
 
