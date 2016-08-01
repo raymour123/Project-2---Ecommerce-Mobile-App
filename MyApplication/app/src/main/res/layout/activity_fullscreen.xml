@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#FFF3E0"
     tools:context="com.example.raymour.tintswear.FullscreenActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:keepScreenOn="true"
-        android:src="@drawable/tintscover2"
+        android:src="@drawable/tintscover4"
          />
 
     <!-- This FrameLayout insets its children based on system windows using
@@ -40,7 +40,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="The Shop" />
+                android:text="The Shop"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
     </FrameLayout>
