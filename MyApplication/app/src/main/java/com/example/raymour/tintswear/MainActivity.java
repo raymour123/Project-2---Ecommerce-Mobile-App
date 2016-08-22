@@ -1,5 +1,7 @@
 package com.example.raymour.tintswear;
 
+import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,7 +12,9 @@ import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -26,6 +30,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     final DatabaseHelper databaseHelper = DatabaseHelper.getsInstance(MainActivity.this);
 
@@ -148,6 +153,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        ComponentName componentName = new ComponentName(this,SearchResultActivity.class);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
+        searchView.setQueryHint("What style?");
+        Log.i(TAG, "onCreateOptionsMenu: create");
 
         return true;
     }

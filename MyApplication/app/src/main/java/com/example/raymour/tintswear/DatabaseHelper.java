@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * Created by raymour on 7/26/16.
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
+    private static final String TAG = "DatabaseHelper";
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "TintsDatabase";
@@ -25,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_SUNGLASS_DESCRIPTION = "sunglasses_description";
 
 
-    public static final String[] INVENTORY_COLUMNS = {COL_ID,COL_SUNGLASS_NAME, COL_SUNGLASS_IMAGELOCATION,COL_SUNGLASS_PRICE, COL_SUNGLASS_DESCRIPTION};
+    public static final String[] INVENTORY_COLUMNS = {COL_ID, COL_SUNGLASS_NAME, COL_SUNGLASS_DESCRIPTION};
 
     public static final String SUNGLASSSALE_TABLE_NAME = "SunglassSales";
     public static final String COL_SUNGLASSSALE_NAME = "sunglass_sale_name";
@@ -178,6 +180,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = getWritableDatabase();
         database.execSQL("DELETE FROM " + SUNGLASSSALE_TABLE_NAME);
         database.close();
+    }
+
+    public Cursor searchSunglasses(String query){
+        SQLiteDatabase database = getReadableDatabase();
+        String where = " " + COL_SUNGLASS_NAME + " LIKE ? OR " +
+                COL_SUNGLASS_DESCRIPTION + " LIKE ?";
+        Cursor cursor = database.query(TINTSINVENTORY_TABLE_NAME,
+                INVENTORY_COLUMNS, where,
+                new String[]{"%" + query + "%","%" + query + "%"},null,null,null);
+        Log.i(TAG, "searchSunglasses: query");
+                return cursor;
     }
 }
 
