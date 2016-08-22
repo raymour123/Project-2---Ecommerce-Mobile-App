@@ -44,6 +44,14 @@ public class CPRecyclerViewAdapter extends RecyclerView.Adapter<CPViewHolder> {
         holder.mPriceView.setText(mCustomProductList.get(position).getSunglassPrice());
         holder.mDescView.setText(mCustomProductList.get(position).getSunglassDescription());
 
+        holder.mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DetailDialog detailDialog = new DetailDialog();
+                detailDialog.launchDetailDialog(view.getContext(),position,mCustomProductList);
+            }
+        });
+
         View.OnClickListener onClickListener = new View.OnClickListener(){
             @Override
             public void onClick(View view) {
