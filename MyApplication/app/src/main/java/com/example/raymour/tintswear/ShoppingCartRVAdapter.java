@@ -18,18 +18,20 @@ public class ShoppingCartRVAdapter extends RecyclerView.Adapter<ShoppingCartView
     Context mContext;
     List<SunglassSale> sunglassSalesList = new ArrayList<>();
 
+
+    //adds params for list - constructor
     public ShoppingCartRVAdapter(Context context, List<SunglassSale> sunglassSalesList) {
         mContext = context;
         this.sunglassSalesList = sunglassSalesList;
     }
-
+        //sets the layout within the Recyclerview
     @Override
     public ShoppingCartViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.customshoppingcart, parent, false);
         ShoppingCartViewHolder viewHolder = new ShoppingCartViewHolder(view);
         return viewHolder;
     }
-
+        //sets the specific content of each item in the RV
     @Override
     public void onBindViewHolder(final ShoppingCartViewHolder holder, int position) {
         SunglassSale item = sunglassSalesList.get(position);

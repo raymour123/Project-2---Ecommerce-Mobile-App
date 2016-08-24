@@ -52,6 +52,7 @@ public class CPRecyclerViewAdapter extends RecyclerView.Adapter<CPViewHolder> {
             }
         });
 
+        //sets add to cart button
         View.OnClickListener onClickListener = new View.OnClickListener(){
             @Override
             public void onClick(View view) {

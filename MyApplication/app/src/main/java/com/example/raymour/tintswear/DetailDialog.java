@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class DetailDialog {
     public TextView sunglassNameDetail, sunglassPriceDetail, sunglassDescriptionDetail;
     public ImageView sunglassPicDetail;
 
+    //sets up Detail Dialog box to be called in various activities
     public void launchDetailDialog(final Context context, final int position, final List<Inventory> sunglassList){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -42,6 +44,11 @@ public class DetailDialog {
                 DatabaseHelper helper = DatabaseHelper.getsInstance(context);
                 Inventory inventory = sunglassList.get(position);
 
+                helper.addToCart(inventory);
+                Toast.makeText(context, "Added to Cart", Toast.LENGTH_SHORT).show();
+
+                dialog.dismiss();
+
             }
         });
 
@@ -55,7 +62,7 @@ public class DetailDialog {
 
     }
 
-
+    //links the dialog layout to the specific data being called
     public void setDetailDialogInfo(Inventory inventory){
         sunglassNameDetail.setText(inventory.getSunglassName());
         sunglassPriceDetail.setText(inventory.getSunglassPrice());

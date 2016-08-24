@@ -23,7 +23,7 @@ public class CPViewHolder extends RecyclerView.ViewHolder{
 
     public CPViewHolder(View itemView) {
         super(itemView);
-
+        //sets the RV views up the XML format created
         mTitleView = (TextView) itemView.findViewById(R.id.productName);
         mImageView = (ImageView) itemView.findViewById(R.id.productImage);
         mPriceView = (TextView) itemView.findViewById(R.id.productPrice);

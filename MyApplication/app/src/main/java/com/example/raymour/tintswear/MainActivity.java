@@ -41,24 +41,25 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //fab takes us to the shopping cart
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
                 Intent intent = new Intent(MainActivity.this, ShoppingCartActivity.class);
                 startActivity(intent);
             }
         });
-
+        //sets up RV
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
         List<Inventory> inventoryList = databaseHelper.getInventoryList();
 
-
+        //Database inventory inputs
         Inventory item1 = new Inventory("Black Betty's", "blackbetty", "29.99", "Bamboo Frames, Stylish, Polarized");
         Inventory item2 = new Inventory("Black Betty Blues", "blackblue", "29.99", "Bamboo Frames, Stylish, Polarized, Blue Reflective Lenses");
         Inventory item3 = new Inventory("Black Betty Fire", "blackorange", "29.99", "Bamboo Frames, Stylish, Polarized, Orange Reflective Lenses");
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 //        Inventory item13 = new Inventory("Los Leches Mirrors", "whitemirror", "29.99", "Bamboo Frames, Stylish, Polarized");
 //        Inventory item14 = new Inventory("Los Leches Fire", "whiteorange", "29.99", "Bamboo Frames, Stylish, Polarized");
 
-
+        //inserting into individual rows
         databaseHelper.insertRowTintsInventory(item1);
         databaseHelper.insertRowTintsInventory(item2);
         databaseHelper.insertRowTintsInventory(item3);
@@ -154,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
+        // initializes search feature and links to DB search method
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView =

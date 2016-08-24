@@ -29,5 +29,13 @@
         android:text="Clear Shopping Cart"
         android:id="@+id/clearShopCartButton"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_done_black_24dp"/>
+
 
 </LinearLayout>

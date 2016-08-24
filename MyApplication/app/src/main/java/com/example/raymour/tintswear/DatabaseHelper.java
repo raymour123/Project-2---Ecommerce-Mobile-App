@@ -75,6 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.close();
     }
 
+    //inserts rows for inventory database
     public void insertRowTintsInventory (Inventory inventory) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -117,6 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return sunglassList;
     }
 
+    //adds a row to the shopping cart
     public void addToCart(Inventory sunglass){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -129,6 +131,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    //turns table into a list of object to pass to the RV adapter
     public ArrayList<SunglassSale> getCartItemsObjects() {
         ArrayList<SunglassSale> shoppingCartList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -176,12 +179,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        database.delete(SUNGLASSSALE_TABLE_NAME, selection, selectionArgs);
 //        database.close();
 //    }
+    //method created to clear the database of cart info
     public void clearCartButtonMethod() {
         SQLiteDatabase database = getWritableDatabase();
         database.execSQL("DELETE FROM " + SUNGLASSSALE_TABLE_NAME);
         database.close();
     }
 
+    //search method
     public Cursor searchSunglasses(String query){
         SQLiteDatabase database = getReadableDatabase();
         String where = " " + COL_SUNGLASS_NAME + " LIKE ? OR " +
